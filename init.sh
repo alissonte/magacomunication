@@ -5,7 +5,7 @@ echo "Checking DB connection ..."
 i=0
 until [ $i -ge 20 ]
 do
-  nc -z 172.21.0.2 3306 && break
+  nc -z magalu-mysql 3306 && break
  
   i=$(( i + 1 ))
  
@@ -20,5 +20,6 @@ then
 fi
  
 echo "DB is up ..."
+echo pwd
  
-java-jar build/libs/maga.jar
+java -jar ./app/build/libs/maga.jar

@@ -1,13 +1,11 @@
-version: '2.2'
+version: '3.3'
 
 services: 
-  mysqldb:
-    container_name: magalu-mysql
+  app-db:
     image: mysql:5.7
+    container_name: magalu-mysql
     restart: always
     env_file: ./.env
-    volumes:
-      - ./mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
@@ -16,14 +14,14 @@ services:
     networks:
       - magalu-network
 
-  app:
+  app-service:
     container_name: magalu-app
     build:
       context: .
       dockerfile: ./app/Dockerfile
     image: magalu-app
     depends_on:
-      - mysqldb
+      - app-db
     stdin_open: true
     tty: true
     networks:
