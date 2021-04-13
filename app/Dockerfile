@@ -8,6 +8,6 @@ RUN unzip gradle-6.5-bin.zip
 ENV GRADLE_HOME /gradle-6.5
 ENV PATH $PATH:/gradle-6.5/bin
 #compile and run app
-WORKDIR magacomunication
-RUN gradle build --no-build-cache
+WORKDIR magacomunication/app
+RUN gradle build -x test --no-build-cache
 # ENTRYPOINT ["java", "-jar", "build/libs/maga.jar"]

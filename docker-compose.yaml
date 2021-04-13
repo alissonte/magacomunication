@@ -12,16 +12,10 @@ services:
     ports:
       - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
     networks:
-      - mysql-compose-network
-
-  #adminer:
-  #  image: adminer
-  #  ports:
-  #    - 8080:8080
-  #  networks:
-  #    - mysql-compose-network
+      - magalu-network
 
   app:
+    container_name: magalu-app
     build:
       context: .
       dockerfile: ./app/Dockerfile
@@ -30,7 +24,9 @@ services:
       - mysqldb
     stdin_open: true
     tty: true
+    networks:
+      - magalu-network
 
 networks: 
-  mysql-compose-network:
+  magalu-network:
     driver: bridge
