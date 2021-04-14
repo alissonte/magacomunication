@@ -30,7 +30,7 @@ public class Communication implements Serializable {
 
     @ManyToOne(targetEntity = TypeCommunication.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "type", nullable = false, updatable = false, insertable = false)
-    private TypeCommunication typeCommunication;
+    private TypeCommunication type;
 
     //@Enumerated(EnumType.STRING)
     @Column(name = "status")
