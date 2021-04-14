@@ -28,10 +28,12 @@ public class Communication implements Serializable {
     @Column(name = "message", nullable = false, length = 1000)
     private String message;
 
-    @ManyToOne(targetEntity = TypeCommunication.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = TypeCommunication.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "type", nullable = false, updatable = false, insertable = false)
     private TypeCommunication typeCommunication;
 
-    @Enumerated(EnumType.ORDINAL)
+    //@Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    @Convert(converter = StatusCommunicationConverter.class)
     private StatusCommunicationEnum status;
 }

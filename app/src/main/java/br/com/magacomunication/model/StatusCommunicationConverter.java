@@ -10,7 +10,7 @@ public class StatusCommunicationConverter implements AttributeConverter<StatusCo
         if(attribute == null) {
             return null;
         }
-        return attribute.getStatus();
+        return attribute.getCode();
     }
 
     @Override

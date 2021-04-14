@@ -8,15 +8,16 @@ import java.util.Arrays;
 @Getter
 @AllArgsConstructor
 public enum StatusCommunicationEnum {
-    PENDING(100),
-    SENT(200),
-    CANCELLED(300);
+    PENDING(100, "Pending"),
+    SENT(200, "Sent"),
+    CANCELLED(300,"Cancelled");
 
-    private final Integer status;
+    private final Integer code;
+    private final String status;
 
-    public static StatusCommunicationEnum valueOf(Integer status) {
-        return status == null ? null : Arrays.stream(StatusCommunicationEnum.values())
-                .filter(v -> v.status.equals(status))
+    public static StatusCommunicationEnum valueOf(Integer code) {
+        return code == null ? null : Arrays.stream(StatusCommunicationEnum.values())
+                .filter(v -> v.code.equals(code))
                 .findFirst()
                 .orElse(null);
     }
