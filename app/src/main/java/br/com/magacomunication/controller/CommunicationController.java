@@ -7,9 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Magalu Communication"})
 @RestController
@@ -18,11 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommunicationController {
     private final CommunicationService communicationService;
 
-    @ApiOperation(value = "Recupera todos os envios de comunicação")
+    @ApiOperation(value = "Recupera todos os agendamentos envios de comunicação")
     @GetMapping(value = "/", produces = "application/json")
     public ResponseEntity<Page<CommunicationDTO>> getCommunications() {
         return ResponseEntity.ok().body(communicationService.findAllCommunication());
     }
 
-    //public ResponseEntity<Communication> createCommunication(@RequestBody )
+    @ApiOperation(value = "Salva um agendamento envio de comunicação")
+    @PostMapping
+    public ResponseEntity<CommunicationDTO> createCommunication(@Validated @RequestBody CommunicationDTO communicationDTO) {
+        return ResponseEntity.ok().body(communicationService.saveNewScheduleCommunication(communicationDTO));
+    }
 }

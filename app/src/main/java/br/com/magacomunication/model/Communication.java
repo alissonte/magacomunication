@@ -11,6 +11,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "communication")
 public class Communication implements Serializable {
 
