@@ -23,6 +23,8 @@ services:
     depends_on:
       - app-db
     stdin_open: true
+    ports:
+      - "8080:8080"
     tty: true
     networks:
       - magalu-network
