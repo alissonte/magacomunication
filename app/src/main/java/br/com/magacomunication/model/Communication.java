@@ -33,7 +33,6 @@ public class Communication implements Serializable {
     @JoinColumn(name = "type", nullable = false, updatable = false, insertable = false)
     private TypeCommunication type;
 
-    //@Enumerated(EnumType.STRING)
     @Column(name = "status")
     @Convert(converter = StatusCommunicationConverter.class)
     private StatusCommunicationEnum status;

@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommunicationDTO {
 
-    @JsonIgnore
+    @JsonProperty(value = "Id")
     private Integer id;
 
     @JsonProperty(value = "Destinatário", required = true)

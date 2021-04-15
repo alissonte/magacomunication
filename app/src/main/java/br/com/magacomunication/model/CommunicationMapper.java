@@ -7,6 +7,9 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommunicationMapper {
@@ -18,5 +21,9 @@ public interface CommunicationMapper {
 
     default Page<CommunicationDTO> map(Page<Communication> page) {
         return page.map(this::map);
+    }
+
+    default List<CommunicationDTO> map(List<Communication> list) {
+        return list.stream().map(this::map).collect(Collectors.toList());
     }
 }

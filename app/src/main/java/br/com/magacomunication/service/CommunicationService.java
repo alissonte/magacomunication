@@ -1,19 +1,22 @@
 package br.com.magacomunication.service;
 
+import br.com.magacomunication.common.CommunicationParamsException;
 import br.com.magacomunication.model.Communication;
 import br.com.magacomunication.model.CommunicationDTO;
 import br.com.magacomunication.model.CommunicationMapper;
+import br.com.magacomunication.model.StatusCommunicationEnum;
 import br.com.magacomunication.model.TypeCommunication;
 import br.com.magacomunication.repository.CommunicationRepository;
 import br.com.magacomunication.repository.TypeCommunicationRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.ZonedDateTime;
+import java.util.List;
 
+import static java.util.Objects.isNull;
 import static org.springframework.util.StringUtils.hasLength;
 
 @Service
@@ -24,11 +27,25 @@ public class CommunicationService {
     private final TypeCommunicationRepository typeCommunicationRepository;
     private final CommunicationMapper communicationMapper;
 
-    public Page<CommunicationDTO> findAllCommunication() {
-        return communicationMapper.map(communicationRepository.findAll(Pageable.unpaged()));
+    /**
+     *
+     * @return
+     */
+    public List<CommunicationDTO> findAllCommunication() {
+        List<Communication> communications = communicationRepository.findAll();
+        return communicationMapper.map(communications);
     }
 
-    public CommunicationDTO saveNewScheduleCommunication(final CommunicationDTO communicationDTO) {
+    /**
+     *
+     * @param communicationDTO
+     * @return
+     */
+    public CommunicationDTO saveScheduleCommunication(final CommunicationDTO communicationDTO) {
+        if(!(hasLength(communicationDTO.getMessage()) && hasLength(communicationDTO.getIdentifier()) && communicationDTO.getDtSend() != null)){
+            throw new CommunicationParamsException("Parâmetros inválidos");
+        }
+
         final String type = communicationDTO.getType();
         final TypeCommunication tc = hasLength(type) ? typeCommunicationRepository.findByName(type).orElse(null) : null;
 
@@ -40,5 +57,53 @@ public class CommunicationService {
                 .build();
 
         return communicationMapper.map(communicationRepository.save(communication));
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public CommunicationDTO findCommunicationById(final Integer id) {
+        Communication communication = getCommunicationById(id);
+        return communicationMapper.map(communication);
+    }
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public List<CommunicationDTO> findCommunicationByRecipient(final String name) {
+        List<Communication> communications = communicationRepository.findAllByIdentifier(name);
+        return communicationMapper.map(communications);
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public CommunicationDTO cancelCommunication(final Integer id) {
+        Communication communication = getCommunicationById(id);
+        communication.setStatus(StatusCommunicationEnum.CANCELLED);
+        return communicationMapper.map(communicationRepository.save(communication));
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public void deleteCommunication(Integer id) {
+        getCommunicationById(id);
+        communicationRepository.deleteById(id);
+    }
+
+    private Communication getCommunicationById(Integer id) {
+        Communication communication = communicationRepository.findById(id).orElse(null);
+        if (isNull(communication)) {
+            throw new EntityNotFoundException("Communication not found");
+        }
+        return communication;
     }
 }
