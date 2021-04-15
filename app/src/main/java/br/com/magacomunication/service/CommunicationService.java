@@ -28,12 +28,9 @@ public class CommunicationService {
         return communicationMapper.map(communicationRepository.findAll(Pageable.unpaged()));
     }
 
-    public CommunicationDTO saveNewScheduleCommunication(CommunicationDTO communicationDTO) {
-        TypeCommunication tc = null;
-
-        if(hasLength(communicationDTO.getType())) {
-            tc = typeCommunicationRepository.findByName(communicationDTO.getType()).orElse(null);
-        }
+    public CommunicationDTO saveNewScheduleCommunication(final CommunicationDTO communicationDTO) {
+        final String type = communicationDTO.getType();
+        final TypeCommunication tc = hasLength(type) ? typeCommunicationRepository.findByName(type).orElse(null) : null;
 
         Communication communication = Communication.builder()
                 .identifier(communicationDTO.getIdentifier())

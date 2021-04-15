@@ -25,7 +25,7 @@ public class CommunicationController {
 
     @ApiOperation(value = "Salva um agendamento envio de comunicação")
     @PostMapping
-    public ResponseEntity<CommunicationDTO> createCommunication(@Validated @RequestBody CommunicationDTO communicationDTO) {
+    public ResponseEntity<CommunicationDTO> createCommunication(final @Validated @RequestBody CommunicationDTO communicationDTO) {
         return ResponseEntity.ok().body(communicationService.saveNewScheduleCommunication(communicationDTO));
     }
 }

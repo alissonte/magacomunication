@@ -23,7 +23,7 @@ public class CustomLocalDateTimeSerializer extends StdSerializer<ZonedDateTime> 
     }
 
     @Override
-    public void serialize(ZonedDateTime value, JsonGenerator gen, SerializerProvider serializer)
+    public void serialize(final ZonedDateTime value, final JsonGenerator gen, final SerializerProvider serializer)
             throws IOException, JsonProcessingException {
 
         gen.writeString(formatter.format(value));
