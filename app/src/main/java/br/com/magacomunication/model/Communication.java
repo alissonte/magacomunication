@@ -1,8 +1,21 @@
 package br.com.magacomunication.model;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
@@ -30,7 +43,9 @@ public class Communication implements Serializable {
     private String message;
 
     @ManyToOne(targetEntity = TypeCommunication.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "type", nullable = false, updatable = false, insertable = false)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "type")
+    @Cascade({ CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
     private TypeCommunication type;
 
     @Column(name = "status")
