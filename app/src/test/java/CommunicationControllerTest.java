@@ -53,7 +53,7 @@ public class CommunicationControllerTest {
             .identifier("alisson")
             .message("Teste mensagem controller")
             .status(StatusCommunicationEnum.PENDING)
-            .type(TypeCommunicationEnum.valueOf(1).getDescription())
+            .type(TypeCommunicationEnum.EMAIL)
             .build();
 
         // when

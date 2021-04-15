@@ -16,7 +16,6 @@ public interface CommunicationMapper {
 
     CommunicationMapper MAPPER = Mappers.getMapper(CommunicationMapper.class);
 
-    @Mapping(target = "type", source = "source.type.name")
     CommunicationDTO map(Communication source);
 
     default Page<CommunicationDTO> map(Page<Communication> page) {

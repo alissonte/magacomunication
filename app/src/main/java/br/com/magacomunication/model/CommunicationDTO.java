@@ -1,7 +1,6 @@
 package br.com.magacomunication.model;
 
 import br.com.magacomunication.common.CustomLocalDateTimeSerializer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,7 +34,8 @@ public class CommunicationDTO {
     private String message;
 
     @JsonProperty("Tipo de Envio")
-    private String type;
+    @Builder.Default
+    private TypeCommunicationEnum type = TypeCommunicationEnum.EMAIL;
 
     @JsonProperty("Status")
     @Builder.Default

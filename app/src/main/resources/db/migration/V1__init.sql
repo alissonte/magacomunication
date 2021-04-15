@@ -28,21 +28,10 @@ CREATE TABLE `communication` (
   `dt_send` date NOT NULL,
   `message` varchar(1000) NOT NULL,
   `type` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT 100 DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_communication_1_idx` (`type`),
-  CONSTRAINT `fk_communication_1` FOREIGN KEY (`type`) REFERENCES `type_communication` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `communication`
---
-
-LOCK TABLES `communication` WRITE;
-/*!40000 ALTER TABLE `communication` DISABLE KEYS */;
-/*!40000 ALTER TABLE `communication` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `type_communication`
@@ -57,16 +46,6 @@ CREATE TABLE `type_communication` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `type_communication`
---
-
-LOCK TABLES `type_communication` WRITE;
-/*!40000 ALTER TABLE `type_communication` DISABLE KEYS */;
-INSERT INTO `type_communication` VALUES (1,'Email'),(2,'Sms'),(3,'Push'),(4,'Whatsapp');
-/*!40000 ALTER TABLE `type_communication` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -77,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-13 21:09:14
+-- Dump completed on 2021-04-15 17:55:44

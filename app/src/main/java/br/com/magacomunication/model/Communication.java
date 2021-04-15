@@ -42,11 +42,9 @@ public class Communication implements Serializable {
     @Column(name = "message", nullable = false, length = 1000)
     private String message;
 
-    @ManyToOne(targetEntity = TypeCommunication.class, fetch = FetchType.EAGER)
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "type")
-    @Cascade({ CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
-    private TypeCommunication type;
+    @Column(name = "type")
+    @Convert(converter = TypeCommunicationConverter.class)
+    private TypeCommunicationEnum type;
 
     @Column(name = "status")
     @Convert(converter = StatusCommunicationConverter.class)

@@ -8,11 +8,11 @@ import java.util.Arrays;
 @Getter
 @AllArgsConstructor
 public enum TypeCommunicationEnum {
-
+    NOT_DEFINED(0, ""),
     EMAIL(1, "Email"),
     SMS(2, "Sms"),
     SENT(3, "Push"),
-    CANCELLED(4,"Whatsapp");
+    CANCELLED(4,"WhatsApp");
 
     private final Integer code;
     private final String description;

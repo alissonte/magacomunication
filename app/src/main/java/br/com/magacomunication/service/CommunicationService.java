@@ -5,7 +5,6 @@ import br.com.magacomunication.model.Communication;
 import br.com.magacomunication.model.CommunicationDTO;
 import br.com.magacomunication.model.CommunicationMapper;
 import br.com.magacomunication.model.StatusCommunicationEnum;
-import br.com.magacomunication.model.TypeCommunication;
 import br.com.magacomunication.repository.CommunicationRepository;
 import br.com.magacomunication.repository.TypeCommunicationRepository;
 import lombok.AllArgsConstructor;
@@ -46,14 +45,11 @@ public class CommunicationService {
             throw new CommunicationParamsException("Parâmetros inválidos");
         }
 
-        final String type = communicationDTO.getType();
-        final TypeCommunication tc = hasLength(type) ? typeCommunicationRepository.findByName(type).orElse(null) : null;
-
         Communication communication = Communication.builder()
                 .identifier(communicationDTO.getIdentifier())
                 .dtSend(ZonedDateTime.now())
                 .message(communicationDTO.getMessage())
-                .type(tc)
+                .type(communicationDTO.getType())
                 .build();
 
         return communicationMapper.map(communicationRepository.save(communication));
