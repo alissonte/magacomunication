@@ -41,14 +41,14 @@ Foi adotado o padrão **Rest** e para melhor acesso e entendimento, foi utilizad
 * DELETE: **/communication/{id}** - Deleta um agendamento
 
 Para o metodo POST é necessário de um body correspondente, segue um exemplo:
-```java
+```javascript
 {
   "Data/Hora": "2021-04-16T01:25:14.447Z", ==> Exemplo de Data.
   "Destinatário": "alisson", ==> Destinatário no qual a mensagem será enviada.
-  "Id": 0, ==> Não  necessário.
-  "Mensagem": "Mensagem deve ser enviada em uma determinada data", ==> Mensagem a ser enviada.
-  "Status": "PENDING", ==> Status inicial do registro, esse campo não é obrigatório.
-  "Tipo de Envio": "Email" ==> Tipo de envio, pode ser entre os 4 definidos no documento: SMS, Whatsapp, Email ou Push. Esse campo não é obrigatório.
+  "Id": 0, ==> Não necessário.
+  "Mensagem": "Mensagem a ser enviada", ==> Mensagem a ser enviada.
+  "Status": "PENDING", ==> Status inicial do registro, esse campo não é obrigatório no body.
+  "Tipo de Envio": "Email" ==> Tipo de envio, pode ser entre os 4 definidos no documento: SMS, Whatsapp, Email ou Push. Esse campo não é obrigatório no body.
 }
 ```
 
