@@ -3,9 +3,10 @@ package br.com.magacomunication.common;
 import lombok.Getter;
 
 @Getter
-public class CommunicationParamsException extends RuntimeException{
+public class CommunicationParamsException extends RuntimeException {
 
-    public CommunicationParamsException(String message) {
+    public CommunicationParamsException(final String message) {
         super(message);
     }
+
 }
