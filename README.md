@@ -26,8 +26,8 @@ docker-compose up -d
 ```
 
 ## ⚙️ Acessando o serviço
-Foi adotado o padrão **Rest** e para melhor acesso e entendimento, foi utilizado o **Swagger**. Para acessar o serviço basta acessar o endereço
-**http://localhost:8080/swagger-ui.html** no browser. Irá abrir uma tela semelhante a essa abaixo:
+Foi adotado o padrão **Rest** e para melhor acesso e entendimento, foi utilizado o **Swagger**. Para acessar o serviço basta ir no browser e inseridor a URL
+**http://localhost:8080/swagger-ui.html**. Uma tela, com as informações do serviço, deverá aparecer.
 
 ![image](https://user-images.githubusercontent.com/585455/114957888-4b15a900-9e38-11eb-9a36-8d38e76a1996.png)
 
