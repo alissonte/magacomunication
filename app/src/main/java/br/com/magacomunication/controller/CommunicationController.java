@@ -44,9 +44,15 @@ public class CommunicationController {
     }
 
     @ApiOperation(value="Cancela Agendamento", notes = "Cancela um agendamento envio de comunicação pelo id. Ao executar o agendamento ficará com o status 'Cancelled'")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<CommunicationDTO> updateCommunication(final @PathVariable(value = "id") Integer id) {
+    @PatchMapping(value = "/cancel/{id}")
+    public ResponseEntity<CommunicationDTO> cancelCommunication(final @PathVariable(value = "id") Integer id) {
         return ResponseEntity.ok().body(communicationService.cancelCommunication(id));
+    }
+
+    @ApiOperation(value="Atualiza Agendamento", notes = "Atualiza um agendamento envio de comunicação pelo id.")
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CommunicationDTO> updateCommunication(final @PathVariable(value = "id") Integer id, final @Validated @RequestBody CommunicationDTO communicationDTO) {
+        return ResponseEntity.ok().body(communicationService.updateCommunication(id, communicationDTO));
     }
 
     @ApiOperation(value="Deleta Agendamento", notes = "Deleta um agendamento envio de comunicação pelo id")

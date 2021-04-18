@@ -12,4 +12,6 @@ public interface CommunicationRepository extends PagingAndSortingRepository<Comm
 
     List<Communication> findAllByIdentifier(String identifier);
 
+    boolean existsCommunicationById(Integer id);
+
 }

@@ -45,12 +45,7 @@ public class CommunicationService {
             throw new CommunicationParamsException("Parâmetros inválidos");
         }
 
-        Communication communication = Communication.builder()
-                .identifier(communicationDTO.getIdentifier())
-                .dtSend(LocalDateTime.now())
-                .message(communicationDTO.getMessage())
-                .type(communicationDTO.getType())
-                .build();
+        Communication communication = buildCommunication(communicationDTO);
 
         return communicationMapper.map(communicationRepository.save(communication));
     }
@@ -95,11 +90,38 @@ public class CommunicationService {
         communicationRepository.deleteById(id);
     }
 
+    /**
+     *
+     * @param id
+     * @param communicationDTO
+     * @return
+     */
+    public CommunicationDTO updateCommunication(final Integer id, final CommunicationDTO communicationDTO) {
+        if(!communicationRepository.existsCommunicationById(id)) {
+            throw new EntityNotFoundException("Communication not found");
+        }
+
+        Communication communication = buildCommunication(communicationDTO);
+        communication.setId(id);
+
+        return communicationMapper.map(communicationRepository.save(communication));
+    }
+
     private Communication getCommunicationById(Integer id) {
         Communication communication = communicationRepository.findById(id).orElse(null);
         if (isNull(communication)) {
             throw new EntityNotFoundException("Communication not found");
         }
         return communication;
+    }
+
+    private Communication buildCommunication(CommunicationDTO communicationDTO) {
+        return Communication.builder()
+                .identifier(communicationDTO.getIdentifier())
+                .dtSend(LocalDateTime.now())
+                .message(communicationDTO.getMessage())
+                .type(communicationDTO.getType())
+                .status(communicationDTO.getStatus())
+                .build();
     }
 }
