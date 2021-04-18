@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CustomLocalDateTimeSerializer extends StdSerializer<ZonedDateTime> {
 
-    private static DateTimeFormatter formatter =
+    private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public CustomLocalDateTimeSerializer() {
