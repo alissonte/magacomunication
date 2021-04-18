@@ -19,7 +19,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -49,7 +49,7 @@ public class CommunicationControllerTest {
     @Test
     public void canCreateACommunication() throws Exception {
         final CommunicationDTO communicationDTO = CommunicationDTO.builder()
-            .dtSend(ZonedDateTime.parse("2021-04-14T21:04:44.527Z"))
+            .dtSend(LocalDateTime.parse("16-04-2021 10:44:06"))
             .identifier("alisson")
             .message("Teste mensagem controller")
             .status(StatusCommunicationEnum.PENDING)

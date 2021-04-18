@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Getter
@@ -37,7 +38,7 @@ public class Communication implements Serializable {
     private String identifier;
 
     @Column(name = "dt_send", nullable = false)
-    private ZonedDateTime dtSend;
+    private LocalDateTime dtSend;
 
     @Column(name = "message", nullable = false, length = 1000)
     private String message;

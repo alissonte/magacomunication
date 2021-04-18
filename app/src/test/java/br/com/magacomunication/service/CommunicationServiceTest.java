@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -38,14 +39,14 @@ public class CommunicationServiceTest {
     public void givenValidParameters_WhenProcess_saveCommunicationWithoutErrors() {
         //Given
         final CommunicationDTO communicationDTO = CommunicationDTO.builder()
-                .dtSend(ZonedDateTime.now())
+                .dtSend(LocalDateTime.now())
                 .identifier("alissonte@gmail.com")
                 .message("Fake message")
                 .status(StatusCommunicationEnum.PENDING).build();
 
         final CommunicationDTO newCommunication = CommunicationDTO.builder()
                 .id(5)
-                .dtSend(ZonedDateTime.now())
+                .dtSend(LocalDateTime.now())
                 .identifier("alissonte@gmail.com")
                 .message("Fake message")
                 .status(StatusCommunicationEnum.PENDING).build();
@@ -156,10 +157,10 @@ public class CommunicationServiceTest {
     }
 
     private Communication getCommunication(final Integer id, final String recipient, final String message) {
-        return Communication.builder().id(id).dtSend(ZonedDateTime.now()).identifier(recipient).message(message).build();
+        return Communication.builder().id(id).dtSend(LocalDateTime.now()).identifier(recipient).message(message).build();
     }
 
     private CommunicationDTO getCommunicationDTO(final Integer id, final String recipient, final String message) {
-        return CommunicationDTO.builder().id(id).dtSend(ZonedDateTime.now()).identifier(recipient).message(message).build();
+        return CommunicationDTO.builder().id(id).dtSend(LocalDateTime.now()).identifier(recipient).message(message).build();
     }
 }

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class CommunicationService {
 
         Communication communication = Communication.builder()
                 .identifier(communicationDTO.getIdentifier())
-                .dtSend(ZonedDateTime.now())
+                .dtSend(LocalDateTime.now())
                 .message(communicationDTO.getMessage())
                 .type(communicationDTO.getType())
                 .build();
